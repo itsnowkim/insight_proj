@@ -1,8 +1,7 @@
-import os
 import streamlit as st
-import numpy as np
 
 def show_ouput(result):
-    st.subheader('결과 보여주기')
+    st.subheader('당신의 추천 음식점입니다.')
+    st.write(result)
 
     

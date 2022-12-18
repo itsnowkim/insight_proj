@@ -1,5 +1,5 @@
-import os
 import streamlit as st
+
 from .constants import menus, tastes, questions
 from .utils import construct_styled_component
 

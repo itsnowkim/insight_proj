@@ -25,7 +25,10 @@ if __name__ == "__main__":
 
         # 유저 정보와 추천 방식으로 추천 알고리즘 진행
         if st.button('추천받기!'):
+            print(information, selected_type)
             result = recommender_system(information, selected_type)
-            # output 보여주기
-            show_ouput(result)
             
+            # output 보여주기
+            if result != '':
+                show_ouput(result)
+

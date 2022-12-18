@@ -1,5 +1,5 @@
-import os
 import streamlit as st
+
 from .utils import construct_styled_component
 
 def eval_type():
