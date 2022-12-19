@@ -80,7 +80,7 @@ def user_info():
                             menu,
                             score,
                             horizontal=True,
-                            key = idx+143
+                            key = idx
                         ))
                     user["menu_preference"] = menu_preference
     return user
