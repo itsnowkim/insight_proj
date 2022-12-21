@@ -1,3 +1,4 @@
+# Pull base image
 FROM python:3.11.1-buster
 
 WORKDIR /workspace
@@ -11,7 +12,7 @@ RUN apt-get install libgl1-mesa-glx -y
 # Upgrade pip and install requirements
 COPY requirements.txt requirements.txt
 RUN pip install -U pip
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 

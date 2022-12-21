@@ -10,4 +10,3 @@ lib
 lib64
 .DS_Store
 __pycache__
-csv
