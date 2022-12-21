@@ -9,7 +9,6 @@ if __name__ == "__main__":
     st.title("Mealpick")
     st.header("당신의 한 끼를 책임질 mealpick")
     
-
     expander1 = st.expander("Start stage 1")
     with expander1:
         information = user_info()

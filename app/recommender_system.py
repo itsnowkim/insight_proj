@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from .utils import construct_horizontal_star
 
 from sklearn.metrics.pairwise import cosine_similarity
 
 def content_based_rec(user_id:str, user_input=dict):
-    df = pd.read_csv('./data_v1.csv')
+    df = pd.read_csv('csv/data_v1.csv')
     df_user = df.iloc[:, [1, 5, 26, 27, 28, 29, 30, 31, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165]].copy()
     df_user.columns = np.arange(len(df_user.columns))
     df_user.set_index(0, inplace=True)
@@ -40,8 +41,8 @@ def content_based_rec(user_id:str, user_input=dict):
     return [(pred.index[i], pred[i]) for i in range(5)]
 
 def matrix_factorization_rec_(user=None, dataframe=None, predicted_ratings=None, user_input=dict):
-    dataframe = pd.read_csv('./data_v1.csv')
-    predicted_ratings = pd.read_csv('prediced_ratings_mf.csv', index_col=0)
+    dataframe = pd.read_csv('csv/data_v1.csv')
+    predicted_ratings = pd.read_csv('csv/prediced_ratings_mf.csv', index_col=0)
     df_mf_sg = dataframe.iloc[:, [104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150]].copy()
     df_mf_sg.fillna(0, inplace=True)
     
@@ -59,8 +60,8 @@ def matrix_factorization_rec_(user=None, dataframe=None, predicted_ratings=None,
     return [(pred.index[i], pred[i]) for i in range(5)]
 
 def implicit_feedback_rec_(user=None, dataframe=None, predicted_ratings=None, user_input=dict):
-    dataframe = pd.read_csv('./data_v1.csv')
-    predicted_ratings = pd.read_csv('prediced_ratings_im.csv', index_col=0)
+    dataframe = pd.read_csv('csv/data_v1.csv')
+    predicted_ratings = pd.read_csv('csv/prediced_ratings_im.csv', index_col=0)
     df_mf_sg = dataframe.iloc[:, [104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150]].copy()
     df_mf_sg.fillna(0, inplace=True)
     
@@ -85,10 +86,14 @@ def star(num:float):
     path_emp = './img/empty.png'
     rnum = round(num, 1)
 
-    for i in range(int(rnum)):
-        st.image(path_full, width=20)
-    if (rnum-int(rnum)>=0.5 and rnum-int(rnum)<1):
-        st.image(path_half, width=20)
+    # for i in range(int(rnum)):
+    #     st.image(path_full, width=20)
+
+    full_star = construct_horizontal_star(rnum)
+    st.markdown(full_star, unsafe_allow_html=True)
+
+    # if (rnum-int(rnum)>=0.5 and rnum-int(rnum)<1):
+    #     st.image(path_half, width=20)
     st.write(rnum)
 
 
@@ -99,6 +104,7 @@ def recommender_system(information, selected_type):
     #content_based_rec
     if selected_type == 'type1':
         rec_cb = content_based_rec(information['name'], information)
+        print(rec_cb)
         for i in rec_cb:
             st.write(i[0])
             star(i[1])
