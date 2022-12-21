@@ -46,6 +46,7 @@ def user_info():
             placeholder="당신의 이름은?"
         )
         if name != '':
+            user["name"] = name
             st.write(f"{name}님, 반갑습니다.")
 
             st.markdown("#### 성별을 입력해 주세요")
