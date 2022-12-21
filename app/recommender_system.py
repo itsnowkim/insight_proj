@@ -79,24 +79,10 @@ def implicit_feedback_rec_(user=None, dataframe=None, predicted_ratings=None, us
     return [(pred.index[i], pred[i]) for i in range(5)]
 
 def star(num:float):
-    # star_full='★'
-    # star_empty='☆'
-    path_full = './img/full.png'
-    path_half = './img/half.png'
-    path_emp = './img/empty.png'
     rnum = round(num, 1)
 
-    # for i in range(int(rnum)):
-    #     st.image(path_full, width=20)
-
-    full_star = construct_horizontal_star(rnum)
-    st.markdown(full_star, unsafe_allow_html=True)
-
-    # if (rnum-int(rnum)>=0.5 and rnum-int(rnum)<1):
-    #     st.image(path_half, width=20)
-    st.write(rnum)
-
-
+    star_rate = construct_horizontal_star(rnum)
+    st.markdown(star_rate, unsafe_allow_html=True)
 
 def recommender_system(information, selected_type):
     st.subheader(f'{selected_type}에 의한 추천시스템 알고리즘 시작')
